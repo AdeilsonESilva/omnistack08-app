@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import api from '../services/api';
+import { ENDPOINT } from '../utils/constants';
 
 import logo from '../assets/logo.png';
 import like from '../assets/like.png';
@@ -37,7 +38,7 @@ export default function Main ({ navigation }) {
   }, [id]);
 
   useEffect(() => {
-    const socket = io('http://localhost:3333', {
+    const socket = io(ENDPOINT, {
       query: { user: id }
     });
 
