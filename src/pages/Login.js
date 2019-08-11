@@ -26,10 +26,14 @@ export default function Login ({ navigation }) {
   }, []);
 
   async function handleLogin () {
-    const response = await api.post('/devs', { username: user });
-    const { _id } = response.data;
-    await AsyncStorage.setItem('user', _id);
-    navigation.navigate('Main', { user: _id });
+    try {
+      const response = await api.post('/devs', { username: user });
+      const { _id } = response.data;
+      await AsyncStorage.setItem('user', _id);
+      navigation.navigate('Main', { user: _id });
+    } catch (error) {
+      alert(error);
+    }
   }
 
   return (
@@ -73,7 +77,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 4,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    marginTop: 20
   },
 
   button: {
